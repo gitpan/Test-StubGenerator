@@ -1,0 +1,10 @@
+[-RegularExpressions::RequireExtendedFormatting]
+[-RegularExpressions::RequireLineBoundaryMatching]
+[-Miscellanea::RequireRcsKeywords]
+[-ValuesAndExpressions::RequireInterpolationOfMetachars]
+[Documentation::RequirePodSections]
+lib_sections = NAME | VERSION | SYNOPSIS | DESCRIPTION | DEPENDENCIES | REQUESTS & BUGS | AUTHOR | COPYRIGHT AND LICENSE
+
+[ControlStructures::ProhibitPostfixControls]
+allow = if
+severity = 1
