@@ -14,7 +14,7 @@ use lib '..';
 
 BEGIN { use_ok('Test::StubGenerator'); }
 
-ok( my $obj = Test::StubGenerator->new({file=>'blib/lib/Test/StubGenerator.pm',tidy_config=>'t/perltidyrc'}),
+ok( my $obj = Test::StubGenerator->new({file=>'blib/lib/Test/StubGenerator.pm',perltidyrc=>'t/perltidyrc'}),
     'can eat own dogfood 1' );
 isa_ok( $obj, 'Test::StubGenerator', 'object $obj' );
 can_ok( $obj,             '_assemble_tests',

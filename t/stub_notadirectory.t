@@ -19,7 +19,7 @@ my $filename = 'filename.t';
 ok( my $stub = Test::StubGenerator->new( {
       file  => 't/inc/MyObj.pm',
       output => $filename,
-      out_dir => 't/boilerplate.t', tidy_config => 't/perltidyrc',
+      out_dir => 't/boilerplate.t', perltidyrc => 't/perltidyrc',
     } ), 'can call new' );
 
 dies_ok { $stub->gen_testfile } "Non directory in out_dir and dies";

@@ -14,7 +14,7 @@ plan tests => 5;
 use_ok( 'Test::StubGenerator' );
 
 my $source = 'sub hithere { return \"hello\" }';
-ok( my $stub = Test::StubGenerator->new( { source => \$source, tidy_config => 't/perltidyrc', }  ),
+ok( my $stub = Test::StubGenerator->new( { source => \$source, perltidyrc => 't/perltidyrc', }  ),
     'can call new' );
 
 ok( my $output = $stub->gen_testfile, 'got output' ),

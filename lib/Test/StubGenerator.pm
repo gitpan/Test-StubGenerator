@@ -8,7 +8,7 @@ use Perl::Tidy;
 use Carp;
 use English qw( -no_match_vars );
 
-use version; our $VERSION = qv('0.9.1');
+use version; our $VERSION = qv('0.9.2');
 
 my %DEFAULT_OPTIONS = ( file      => undef,
                         source    => undef,

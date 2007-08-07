@@ -1,5 +1,10 @@
 Revision history for Test-StubGenerator
 
+0.9.1   August 7, 2007
+        Uploaded to CPAN, many tests failed, realized I needed an option
+        for a user configurable perltidyrc, so added pertidyrc as an option,
+        defaulting to ~/.perltidyrc.
+
 0.9.0   August 1, 2007
         First version checked into repository.
 

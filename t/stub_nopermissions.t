@@ -21,7 +21,7 @@ my $filename = 'filename.t';
 ok( my $stub = Test::StubGenerator->new( {
       file  => 't/inc/MyObj.pm',
       output => $filename,
-      out_dir => '/etc', tidy_config => 't/perltidyrc' ,
+      out_dir => '/etc', perltidyrc => 't/perltidyrc' ,
     } ), 'can call new' );
 
 dies_ok { $stub->gen_testfile } "Non accessible directories can't be written to and dies";

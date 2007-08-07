@@ -10,7 +10,7 @@ use File::Spec;
 
 BEGIN { use_ok( 'Test::StubGenerator' ); }
 
-ok( my $stub = Test::StubGenerator->new( { file  => 't/inc/myscript.pl', tidy_config => 't/perltidyrc' } ),
+ok( my $stub = Test::StubGenerator->new( { file  => 't/inc/myscript.pl', perltidyrc => 't/perltidyrc' } ),
     'can call new' );
 
 ok( my $output = $stub->gen_testfile, 'got output' );

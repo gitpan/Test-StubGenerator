@@ -19,7 +19,7 @@ while( my $line = <$log> ){
 }
 SOURCE_END
 
-ok( my $stub = Test::StubGenerator->new( { source => \$source, tidy_config => 't/perltidyrc' } ),
+ok( my $stub = Test::StubGenerator->new( { source => \$source, perltidyrc => 't/perltidyrc' } ),
     'can call new' );
 
 warnings_like { $stub->gen_testfile() }
