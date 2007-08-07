@@ -11,7 +11,7 @@ use File::Spec;
 BEGIN { use_ok( 'Test::StubGenerator' ); }
 
 
-ok( my $stub = Test::StubGenerator->new( { file  => 't/inc/Instance.pm'} ),
+ok( my $stub = Test::StubGenerator->new( { file  => 't/inc/Instance.pm', tidy_config => 't/perltidyrc' } ),
     'can call new' );
 
 ok( my $output = $stub->gen_testfile, 'got output' );

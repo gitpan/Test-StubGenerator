@@ -38,6 +38,6 @@ report:
 	$(OPENCMD) $(BROWSER) cover_db/coverage.html
 
 reclean:
-	rm -rf cover_db blib pm_to_blib Makefile Makefile.old
+	rm -rf cover_db blib pm_to_blib Makefile Makefile.old Test-StubGenerator-*
 MAKE_FRAG
 }

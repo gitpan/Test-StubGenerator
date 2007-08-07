@@ -3,13 +3,16 @@
 use strict;
 use warnings;
 
-use Test::More tests => 5;
-use Test::Exception;
+use Test::More;
 
-use File::Find;
-use File::Spec;
+BEGIN {
+  eval "use Test::Exception";
+  plan skip_all => 'Test::Exception required for tests' if $@;
+}
 
-BEGIN { use_ok( 'Test::StubGenerator' ); }
+plan tests => 5;
+
+use_ok( 'Test::StubGenerator' );
 
 my $source = "\%^*&open;sub()\@sub|}hi\0x45there*\$^{retun\"hello};sub9\'\'\\\'\'\%syntax{error";
 my $stub;

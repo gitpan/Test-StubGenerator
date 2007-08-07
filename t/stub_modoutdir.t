@@ -13,7 +13,7 @@ BEGIN { use_ok( 'Test::StubGenerator' ); }
 ok( my $stub = Test::StubGenerator->new( {
       file  => 't/inc/MyObj.pm',
       output => 'file',
-      out_dir => 't/inc/t',
+      out_dir => 't/inc/t', tidy_config => 't/perltidyrc' ,
     } ), 'can call new' );
 
 ok( $stub->gen_testfile, 'generated output' );

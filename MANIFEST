@@ -16,6 +16,7 @@ t/inc/t/MyObj.t
 t/manifest.t
 t/perl-critic.t
 t/perlcriticrc
+t/perltidyrc
 t/pod-coverage.t
 t/pod.t
 t/stub_instance.t

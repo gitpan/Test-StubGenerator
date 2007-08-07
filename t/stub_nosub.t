@@ -3,13 +3,14 @@
 use strict;
 use warnings;
 
-use Test::More tests => 3;
-use Test::Warn;
+use Test::More;
+BEGIN {
+  eval "use Test::Warn";
+  plan skip_all => 'Test::Warn required for tests' if $@;
+}
 
-use File::Find;
-use File::Spec;
-
-BEGIN { use_ok( 'Test::StubGenerator' ); }
+plan tests => 3;
+use_ok( 'Test::StubGenerator' );
 
 my $source =<<'SOURCE_END';
 open( my $log, '<', shift ) or die "can't open file - $!";
@@ -18,7 +19,7 @@ while( my $line = <$log> ){
 }
 SOURCE_END
 
-ok( my $stub = Test::StubGenerator->new( { source => \$source } ),
+ok( my $stub = Test::StubGenerator->new( { source => \$source, tidy_config => 't/perltidyrc' } ),
     'can call new' );
 
 warnings_like { $stub->gen_testfile() }

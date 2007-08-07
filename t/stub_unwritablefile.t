@@ -3,14 +3,16 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More;
 
-use File::Find;
-use File::Spec;
+BEGIN {
+  eval "use Test::Exception";
+  plan skip_all => 'Test::Exception required for tests' if $@;
+}
 
-use Test::Exception;
+plan tests => 4;
 
-BEGIN { use_ok( 'Test::StubGenerator' ); }
+use_ok( 'Test::StubGenerator' );
 
 my $filename = 'filename.t';
 

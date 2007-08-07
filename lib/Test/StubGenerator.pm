@@ -8,13 +8,14 @@ use Perl::Tidy;
 use Carp;
 use English qw( -no_match_vars );
 
-use version; our $VERSION = qv('0.9.0');
+use version; our $VERSION = qv('0.9.1');
 
-my %DEFAULT_OPTIONS = ( file    => undef,
-                        source  => undef,
-                        output  => undef,
-                        out_dir => undef,
-                        tidy    => 1, );
+my %DEFAULT_OPTIONS = ( file      => undef,
+                        source    => undef,
+                        output    => undef,
+                        out_dir   => undef,
+                        tidy      => 1,
+                        pertidyrc => '~/.perltidyrc', );
 
 sub new {
   my( $class, $arg_ref ) = @_;
@@ -25,12 +26,13 @@ sub new {
     ref $arg_ref eq 'HASH'
     ? ( %DEFAULT_OPTIONS, %{$arg_ref} )
     : %DEFAULT_OPTIONS;
-  $self->{file}      = $option_args{file};
-  $self->{source}    = $option_args{source};
-  $self->{output}    = $option_args{output};
-  $self->{out_dir}   = $option_args{out_dir};
-  $self->{tidy}      = $option_args{tidy};
-  $self->{structure} = {};
+  $self->{file}       = $option_args{file};
+  $self->{source}     = $option_args{source};
+  $self->{output}     = $option_args{output};
+  $self->{out_dir}    = $option_args{out_dir};
+  $self->{tidy}       = $option_args{tidy};
+  $self->{perltidyrc} = $option_args{perltidyrc};
+  $self->{structure}  = {};
 
   # Trim trailing slashes if present for easier interpolation later.
   $self->{out_dir} =~ s{ / $ }{}xms if $self->{out_dir};
@@ -183,7 +185,9 @@ sub gen_testfile {
 
   # Tidy the output if desired
   if( $self->{tidy} ) {
-    perltidy( source => \$test_file, destination => \$test_file );
+    perltidy( source      => \$test_file,
+              destination => \$test_file,
+              perltidyrc  => $self->{perltidyrc} );
   }
   return $self->_handle_output($test_file);
 }
@@ -410,6 +414,11 @@ Pass a true value to indicate that you'd like your generated tests run through
 Perl::Tidy before being returned.  This is the default.  Specify a false
 value to disable this feature.  Note, this will by default use
 your ~/.perltidyrc file for formatting.
+
+=item perltidyrc
+
+If you have a particular perltidyrc file, specify its location in this option.
+Otherwise, the default is to use ~/.perltidyrc.
 
 =item output
 

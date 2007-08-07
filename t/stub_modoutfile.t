@@ -14,7 +14,7 @@ open my $out_fh, '>', 't/inc/modtest.t' or die "can't open file for writing - $!
 
 ok( my $stub = Test::StubGenerator->new( {
       file  => 't/inc/MyObj.pm',
-      output => $out_fh,
+      output => $out_fh, tidy_config => 't/perltidyrc' ,
     } ), 'can call new' );
 
 ok( $stub->gen_testfile, 'generated output' );

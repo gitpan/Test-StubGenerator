@@ -16,7 +16,7 @@ ok( $@, "empty constructor should die" );
 eval { my $stub = Test::StubGenerator->new({}); };
 ok( $@, "empty constructor should die" );
 
-ok( my $stub = Test::StubGenerator->new( { file  => 't/inc/MyObj.pm'} ),
+ok( my $stub = Test::StubGenerator->new( { file  => 't/inc/MyObj.pm', tidy_config => 't/perltidyrc' } ),
     'can call new' );
 
 isa_ok( $stub, 'Test::StubGenerator', '$stub is a Test::StubGenerator' );

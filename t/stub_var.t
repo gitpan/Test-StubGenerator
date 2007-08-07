@@ -3,16 +3,18 @@
 use strict;
 use warnings;
 
-use Test::More tests => 5;
-use Test::Warn;
+use Test::More;
+BEGIN {
+  eval "use Test::Warn";
+  plan skip_all => 'Test::Warn required for tests' if $@;
+}
 
-use File::Find;
-use File::Spec;
+plan tests => 5;
 
-BEGIN { use_ok( 'Test::StubGenerator' ); }
+use_ok( 'Test::StubGenerator' );
 
 my $source = 'sub hithere { return \"hello\" }';
-ok( my $stub = Test::StubGenerator->new( { source => \$source } ),
+ok( my $stub = Test::StubGenerator->new( { source => \$source, tidy_config => 't/perltidyrc', }  ),
     'can call new' );
 
 ok( my $output = $stub->gen_testfile, 'got output' ),

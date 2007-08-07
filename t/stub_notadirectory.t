@@ -3,21 +3,23 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More;
 
-use File::Find;
-use File::Spec;
+BEGIN {
+  eval "use Test::Exception";
+  plan skip_all => 'Test::Exception required for tests' if $@;
+}
 
-use Test::Exception;
+plan tests => 4;
 
-BEGIN { use_ok( 'Test::StubGenerator' ); }
+use_ok( 'Test::StubGenerator' );
 
 my $filename = 'filename.t';
 
 ok( my $stub = Test::StubGenerator->new( {
       file  => 't/inc/MyObj.pm',
       output => $filename,
-      out_dir => 't/boilerplate.t',
+      out_dir => 't/boilerplate.t', tidy_config => 't/perltidyrc',
     } ), 'can call new' );
 
 dies_ok { $stub->gen_testfile } "Non directory in out_dir and dies";
