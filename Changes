@@ -1,5 +1,15 @@
 Revision history for Test-StubGenerator
 
+0.9.3   August 8, 2007
+        Forgot that the order of each %hash was different for older
+        perls, so converted each %self->{structure}->{methods} to use
+        a for loop so i could sort the output.
+
+0.9.2   August 7, 2007
+        Forgot to update the tests for the change of the name of the
+        perltidyrc option.  Also forgot to update this file, but who's
+        counting?
+
 0.9.1   August 7, 2007
         Uploaded to CPAN, many tests failed, realized I needed an option
         for a user configurable perltidyrc, so added pertidyrc as an option,

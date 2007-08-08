@@ -8,7 +8,7 @@ use Perl::Tidy;
 use Carp;
 use English qw( -no_match_vars );
 
-use version; our $VERSION = qv('0.9.2');
+use version; our $VERSION = qv('0.9.3');
 
 my %DEFAULT_OPTIONS = ( file      => undef,
                         source    => undef,
@@ -152,13 +152,16 @@ sub gen_testfile {
   my $declarations = q();
   my $tests        = q();
   my @vars;
-  while( my( $sub, $vars_ref ) = each %{ $self->{structure}->{methods} } ) {
+  for my $sub ( sort keys %{ $self->{structure}->{methods} } ) {
+    my $vars_ref = $self->{structure}->{methods}->{$sub};
     for my $var ( @{$vars_ref} ) {
 
       # Add handy testing variable declarations to the test file...
       if( ! scalar grep { $_ eq $var } @vars ) {
-        $declarations .= sprintf "my $var = %s;\n",
-          $var =~ /\@/ ? q{( '', )} : q{''};    # declare properly arr v. sclr
+        $declarations .=
+          sprintf "my $var = %s;\n", $var =~ /\@/
+          ? q{( '', )}
+          : q{''};    # declare properly arr v. sclr
       }
 
       # ... assuming we haven't run across them already.
@@ -167,7 +170,7 @@ sub gen_testfile {
 
     # If we've got a package, precede all method calls with the object.
     my $object_call = $package ? '$obj->' : q();
-    {    # A little easier to interpolate the array directly.
+    {                 # A little easier to interpolate the array directly.
       local $LIST_SEPARATOR = ', ';
       $tests .= "ok( $object_call$sub( @{ $vars_ref } ), "
         . "'can call $object_call$sub()' );\n"

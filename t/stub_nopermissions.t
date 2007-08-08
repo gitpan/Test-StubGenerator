@@ -25,4 +25,4 @@ ok( my $stub = Test::StubGenerator->new( {
     } ), 'can call new' );
 
 dies_ok { $stub->gen_testfile } "Non accessible directories can't be written to and dies";
-like( $@, qr/Can't open file for writing: Permission/, "Permission denied" );
+like( $@, qr/Can't open file for writing:/, "Permission denied" );
