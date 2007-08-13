@@ -1,5 +1,10 @@
 Revision history for Test-StubGenerator
 
+0.9.4   August 13, 2007
+        Added TODO file to keep track of ideas I want to implement,
+        even though it's not really very full.  Added examples directory
+        to help add kwalitee.  Added support for hashes as args to methods.
+
 0.9.3   August 8, 2007
         Forgot that the order of each %hash was different for older
         perls, so converted each %self->{structure}->{methods} to use

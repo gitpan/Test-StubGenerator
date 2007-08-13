@@ -1,4 +1,5 @@
 Changes
+examples/module.pl
 lib/Test/StubGenerator.pm
 Makefile.PL
 MANIFEST
@@ -19,6 +20,7 @@ t/perlcriticrc
 t/perltidyrc
 t/pod-coverage.t
 t/pod.t
+t/stub_hashash.t
 t/stub_instance.t
 t/stub_invalidvar.t
 t/stub_modoutdir.t
@@ -34,4 +36,5 @@ t/stub_unwritablefile.t
 t/stub_var.t
 t/todo.t
 t/unix-text.t
+TODO
 META.yml                                 Module meta-data (added by MakeMaker)

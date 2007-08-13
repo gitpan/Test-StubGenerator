@@ -7,6 +7,7 @@ WriteMakefile(
     AUTHOR              => 'Kent Cowgill <kent@c2group.net>',
     VERSION_FROM        => 'lib/Test/StubGenerator.pm',
     ABSTRACT_FROM       => 'lib/Test/StubGenerator.pm',
+    ( $ExtUtils::MakeMaker::VERSION > 6.31 ? ( LICENSE => 'perl' ) : () ),
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
@@ -38,6 +39,6 @@ report:
 	$(OPENCMD) $(BROWSER) cover_db/coverage.html
 
 reclean:
-	rm -rf cover_db blib pm_to_blib Makefile Makefile.old Test-StubGenerator-*
+	rm -rf cover_db blib pm_to_blib Makefile Makefile.old MANIFEST.bak Test-StubGenerator-*
 MAKE_FRAG
 }

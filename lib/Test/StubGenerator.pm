@@ -8,7 +8,7 @@ use Perl::Tidy;
 use Carp;
 use English qw( -no_match_vars );
 
-use version; our $VERSION = qv('0.9.3');
+use version; our $VERSION = qv('0.9.4');
 
 my %DEFAULT_OPTIONS = ( file      => undef,
                         source    => undef,
@@ -158,10 +158,20 @@ sub gen_testfile {
 
       # Add handy testing variable declarations to the test file...
       if( ! scalar grep { $_ eq $var } @vars ) {
-        $declarations .=
-          sprintf "my $var = %s;\n", $var =~ /\@/
-          ? q{( '', )}
-          : q{''};    # declare properly arr v. sclr
+        my $arg_decl;
+        if( $var =~ /^\%/ ) {
+          $arg_decl = q{( '' => '', )};
+        }
+        elsif( $var =~ /^\@/ ) {
+          $arg_decl = q{( '', )};
+        }
+        else {
+          $arg_decl = q{''};
+          print "var found: ($var)\n";
+        }
+        $declarations .= "my $var = " . sprintf "%s;\n", $arg_decl;
+
+        # declare properly hash v. arr v. sclr
       }
 
       # ... assuming we haven't run across them already.
@@ -170,7 +180,7 @@ sub gen_testfile {
 
     # If we've got a package, precede all method calls with the object.
     my $object_call = $package ? '$obj->' : q();
-    {                 # A little easier to interpolate the array directly.
+    {    # A little easier to interpolate the array directly.
       local $LIST_SEPARATOR = ', ';
       $tests .= "ok( $object_call$sub( @{ $vars_ref } ), "
         . "'can call $object_call$sub()' );\n"
@@ -243,7 +253,9 @@ sub _generate_preamble {
   # Add interface tests.
   if($constructor_found) {
     my @methods = sort keys %{ $self->{structure}->{methods} };
-    {    # A little easier to interpolate the array directly.
+    if( scalar @methods ) {
+
+      # A little easier to interpolate the array directly.
       local $LIST_SEPARATOR = q(', ');
       $test_file .= "can_ok( \$obj, '@methods' );\n\n";
     }
@@ -344,10 +356,6 @@ Test::StubGenerator - A simple module that analyzes a given source file and
 automatically generates t/*.t style tests for subroutines/methods
 it encounters.
 
-=head1 VERSION
-
-This documentation describes Test::StubGenerator version 0.9.0.
-
 =head1 SYNOPSIS
 
   use Test::StubGenerator;
@@ -399,40 +407,36 @@ Alternatively:
 
 The full list of options:
 
-=over 8
-
-=item file
+=head3 file
 
 Specify the path to the module or source code file for which you want to
 generate test stubs.
 
-=item source
+=head3 source
 
 Alternatively, if the code for which you want to create tests is already in a
 scalar, pass a reference to that scalar as the named source argument.
 
-=item tidy
+=head3 tidy
 
 Pass a true value to indicate that you'd like your generated tests run through
 Perl::Tidy before being returned.  This is the default.  Specify a false
 value to disable this feature.  Note, this will by default use
 your ~/.perltidyrc file for formatting.
 
-=item perltidyrc
+=head3 perltidyrc
 
 If you have a particular perltidyrc file, specify its location in this option.
 Otherwise, the default is to use ~/.perltidyrc.
 
-=item output
+=head3 output
 
 Pass a filename or an open filehandle to direct the output to.  If this option
 isn't specified, then gen_testfile() returns the textual data directly.
 
-=item out_dir
+=head3 out_dir
 
 Specify a directory for which to save your generated test file.
-
-=back
 
 =head1 METHODS
 
@@ -498,6 +502,10 @@ parameter to new() exist and are writeable by your effective user id.
 
 L<PPI>, L<Perl::Tidy>
 
+=head1 VERSION
+
+This documentation describes Test::StubGenerator version 0.9.4.
+
 =head1 AUTHOR
 
 Kent Cowgill, C<kent@c2group.net> L<http://www.kentcowgill.org/>
@@ -522,5 +530,7 @@ Copyright (c) 2007 by Kent Cowgill
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
+
+See L<http://www.perl.com/perl/misc/Artistic.html>
 
 =cut
