@@ -8,7 +8,7 @@ use Perl::Tidy;
 use Carp;
 use English qw( -no_match_vars );
 
-use version; our $VERSION = qv('0.9.4');
+use version; our $VERSION = qv('0.9.5');
 
 my %DEFAULT_OPTIONS = ( file      => undef,
                         source    => undef,
@@ -167,7 +167,6 @@ sub gen_testfile {
         }
         else {
           $arg_decl = q{''};
-          print "var found: ($var)\n";
         }
         $declarations .= "my $var = " . sprintf "%s;\n", $arg_decl;
 
@@ -504,7 +503,7 @@ L<PPI>, L<Perl::Tidy>
 
 =head1 VERSION
 
-This documentation describes Test::StubGenerator version 0.9.4.
+This documentation describes Test::StubGenerator version 0.9.5.
 
 =head1 AUTHOR
 

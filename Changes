@@ -1,5 +1,8 @@
 Revision history for Test-StubGenerator
 
+0.9.5   August 13, 2007
+        Removed the debugging code I accidentally left enabled :(
+
 0.9.4   August 13, 2007
         Added TODO file to keep track of ideas I want to implement,
         even though it's not really very full.  Added examples directory

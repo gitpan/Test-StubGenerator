@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Test-StubGenerator
-version:             0.9.4
+version:             0.9.5
 abstract:            A simple module that analyzes a given source file and
 license:             perl
 generated_by:        ExtUtils::MakeMaker version 6.36
