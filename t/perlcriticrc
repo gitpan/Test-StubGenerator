@@ -1,9 +1,12 @@
 [-RegularExpressions::RequireExtendedFormatting]
 [-RegularExpressions::RequireLineBoundaryMatching]
 [-Miscellanea::RequireRcsKeywords]
-[-ValuesAndExpressions::RequireInterpolationOfMetachars]
-[Documentation::RequirePodSections]
-lib_sections = NAME | VERSION | SYNOPSIS | DESCRIPTION | DEPENDENCIES | REQUESTS & BUGS | AUTHOR | COPYRIGHT AND LICENSE
+[-Modules::RequireVersionVar]
+[-CodeLayout::RequireTidyCode]
+[-Subroutines::RequireFinalReturn]
+[-Documentation::RequirePodSections]
+lib_sections = NAME | VERSION | SYNOPSIS | DESCRIPTION | DEPENDENCIES | SUBROUTINES | BUGS | AUTHOR | LICENSE
+script_sections = NAME | VERSION | USAGE | DESCRIPTION | REQUIRED ARGUMENTS | DIAGNOSTICS | EXIT STATUS | CONFIGURATION | DEPENDENCIES | BUGS | AUTHOR | LICENSE
 
 [ControlStructures::ProhibitPostfixControls]
 allow = if

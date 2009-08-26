@@ -11,9 +11,10 @@ use File::Spec;
 BEGIN { use_ok( 'Test::StubGenerator' ); }
 
 ok( my $stub = Test::StubGenerator->new( {
-      file  => 't/inc/MyObj.pm',
-      output => 'file',
-      out_dir => 't/inc/t', perltidyrc => 't/perltidyrc' ,
+      file    => 't/inc/MyObj.pm',
+      output  => 'file',
+      out_dir => 't/inc/t',
+			tidy    => 0,
     } ), 'can call new' );
 
 ok( $stub->gen_testfile, 'generated output' );
@@ -34,7 +35,7 @@ use warnings;
 
 use Test::More qw/no_plan/;
 
-BEGIN { use_ok('MyObj'); }
+BEGIN { use_ok( 'MyObj' ); }
 
 ok( my $obj = MyObj->new(), 'can create object MyObj' );
 isa_ok( $obj, 'MyObj', 'object $obj' );
@@ -47,7 +48,9 @@ my @names = ( '', );
 # And now to test the methods/subroutines.
 ok( $obj->get_name(), 'can call $obj->get_name() without params' );
 
-ok( $obj->set_names(@names), 'can call $obj->set_names()' );
+ok( $obj->set_names( @names ), 'can call $obj->set_names()' );
 ok( $obj->set_names(), 'can call $obj->set_names() without params' );
+
+
 END_EXPECTED
 }

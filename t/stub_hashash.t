@@ -30,7 +30,7 @@ sub args {
   return 1;
 }
 EOS
-ok ( my $stub = Test::StubGenerator->new( { source => \$source } ),
+ok ( my $stub = Test::StubGenerator->new( { source => \$source, tidy => 0 } ),
     'calling new given valid looking source' );
 ok( my $tests = $stub->gen_testfile, 'produced tests' );
 my $expected = return_expected();
@@ -45,7 +45,7 @@ use warnings;
 
 use Test::More qw/no_plan/;
 
-BEGIN { use_ok('test'); }
+BEGIN { use_ok( 'test' ); }
 
 ok( my $obj = test->new(), 'can create object test' );
 isa_ok( $obj, 'test', 'object $obj' );
@@ -56,9 +56,11 @@ can_ok( $obj, 'args', 'name' );
 my %arg_hash = ( '' => '', );
 
 # And now to test the methods/subroutines.
-ok( $obj->args(%arg_hash), 'can call $obj->args()' );
+ok( $obj->args( %arg_hash ), 'can call $obj->args()' );
 ok( $obj->args(), 'can call $obj->args() without params' );
 
 ok( $obj->name(), 'can call $obj->name() without params' );
+
+
 EOE
 }

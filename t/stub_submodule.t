@@ -10,7 +10,7 @@ use File::Spec;
 
 BEGIN { use_ok( 'Test::StubGenerator' ); }
 
-ok( my $stub = Test::StubGenerator->new( { file  => 't/inc/MyObj/Sub.pm', perltidyrc => 't/perltidyrc' } ),
+ok( my $stub = Test::StubGenerator->new( { file  => 't/inc/MyObj/Sub.pm', tidy => 0 } ),
     'can call new' );
 
 ok( my $output = $stub->gen_testfile, 'got output' );
@@ -30,7 +30,7 @@ use Test::More qw/no_plan/;
 
 use lib '..';
 
-BEGIN { use_ok('MyObj::Sub'); }
+BEGIN { use_ok( 'MyObj::Sub' ); }
 
 ok( my $obj = MyObj::Sub->new(), 'can create object MyObj::Sub' );
 isa_ok( $obj, 'MyObj::Sub', 'object $obj' );
@@ -41,5 +41,7 @@ can_ok( $obj, 'do_it' );
 
 # And now to test the methods/subroutines.
 ok( $obj->do_it(), 'can call $obj->do_it() without params' );
+
+
 END_EXPECTED
 }

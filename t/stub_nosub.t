@@ -19,8 +19,8 @@ while( my $line = <$log> ){
 }
 SOURCE_END
 
-ok( my $stub = Test::StubGenerator->new( { source => \$source, perltidyrc => 't/perltidyrc' } ),
+ok( my $stub = Test::StubGenerator->new( { source => \$source, tidy => 0 } ),
     'can call new' );
 
 warnings_like { $stub->gen_testfile() }
-  [ qr/No packages found/, qr/No subs found/, ];
+  [ { carped => qr/No packages found/ }, { carped => qr/No subs found/ }, ];

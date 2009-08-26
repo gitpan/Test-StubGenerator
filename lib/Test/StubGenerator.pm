@@ -8,7 +8,7 @@ use Perl::Tidy;
 use Carp;
 use English qw( -no_match_vars );
 
-use version; our $VERSION = qv('0.9.5');
+use version; our $VERSION = qv('0.9.6');
 
 my %DEFAULT_OPTIONS = ( file      => undef,
                         source    => undef,
@@ -491,7 +491,7 @@ You have passed an output directory (out_dir) that you don't have permission
 to write to.  Make sure you have the apropriate permission to the directory
 you wish to create test files in.
 
-=head3 "Can't write to file '<filename>' in directory '<directory>'..."
+=head3 "Can't write to file 'filename' in directory 'directory'..."
 
 This means that you have passed an output directory that doesn't exist.
 Please double check that any directory you specify in the named out_dir
@@ -503,7 +503,7 @@ L<PPI>, L<Perl::Tidy>
 
 =head1 VERSION
 
-This documentation describes Test::StubGenerator version 0.9.5.
+This documentation describes Test::StubGenerator version 0.9.6.
 
 =head1 AUTHOR
 
@@ -525,7 +525,7 @@ Kennedy, and Steve Hancock.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2007 by Kent Cowgill
+Copyright (c) 2007-2009 by Kent Cowgill
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
